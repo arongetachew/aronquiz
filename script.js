@@ -5,8 +5,6 @@ const questions = {
     { q: 'Simplify: 4x - x', o: ['2x', '3x', '4', 'x'], a: 1 },
     { q: 'Solve: x + 7 = 12', o: ['5', '6', '7', '8'], a: 0 },
     { q: 'If y = x - 2, what is y when x = 5?', o: ['2', '3', '4', '5'], a: 1 },
-    { q: 'Solve: x/2 = 4', o: ['2', '6', '8', '10'], a: 2 },
-    { q: 'Value of x² when x = 3?', o: ['6', '8', '9', '12'], a: 2 },
     { q: 'Solve for y: 2y + 4 = 10', o: ['2', '3', '4', '5'], a: 1 },
     { q: 'Simplify: 2(x + 3)', o: ['2x+3', '2x+5', '2x+6', 'x+6'], a: 2 },
     { q: 'What is 5x when x = -2?', o: ['-10', '-7', '3', '10'], a: 0 }
@@ -72,7 +70,6 @@ const questionEl = document.getElementById('mcqQuestion');
 const optionsEl = document.getElementById('mcqOptions');
 const resultEl = document.getElementById('mcqResult');
 const scoreEl = document.getElementById('scoreDisplay');
-const nextBtn = document.getElementById('nextBtn');
 const revealBtn = document.getElementById('revealBtn');
 const resetBtn = document.getElementById('resetBtn');
 const themeToggle = document.getElementById('theme-toggle');
@@ -94,13 +91,13 @@ function updateProgress() {
   const poolSize = questions[currentCategory].length;
   const percent = poolSize > 0 ? Math.floor((usedIndices.size / poolSize) * 100) : 0;
   progressBar.style.width = `${percent}%`;
-  
+
   // Update progress section stats
   const attemptEl = document.getElementById('progressAttempted');
   const correctEl = document.getElementById('progressCorrect');
   const scoreStatEl = document.getElementById('progressScore');
   const completionEl = document.getElementById('progressCompletion');
-  
+
   if (attemptEl) attemptEl.textContent = usedIndices.size;
   if (correctEl) correctEl.textContent = score;
   if (scoreStatEl) scoreStatEl.textContent = xp;
@@ -133,7 +130,6 @@ function renderQuestion() {
   resultEl.textContent = 'Choose an answer to proceed.';
   resultEl.className = 'mt-5 p-4 rounded-xl text-sm font-bold text-center ring-2 ring-transparent status-neutral';
   optionsEl.innerHTML = '';
-  nextBtn.disabled = true;
 
   currentQuestion.o.forEach((optionText, index) => {
     const label = document.createElement('label');
@@ -153,17 +149,32 @@ function renderQuestion() {
       if (isCorrect) {
         score++;
         xp += 20;
-        resultEl.textContent = 'Correct! ✅';
+        resultEl.textContent = 'Correct! ✅ Loading next...';
         resultEl.className = 'mt-5 p-4 rounded-xl text-sm font-bold text-center ring-2 ring-secondary status-correct';
-        label.classList.add('ring-2', 'ring-secondary', 'bg-secondary-container/30');
+        
+        // Explicit custom class logic
+        label.classList.add('quiz-correct');
+        label.classList.remove('bg-surface-container-high', 'text-on-surface');
       } else {
-        resultEl.textContent = `Wrong! Answer: ${currentQuestion.o[currentQuestion.a]}`;
+        resultEl.textContent = `Wrong! Answer: ${currentQuestion.o[currentQuestion.a]}. Loading next...`;
         resultEl.className = 'mt-5 p-4 rounded-xl text-sm font-bold text-center ring-2 ring-error status-wrong';
-        label.classList.add('ring-2', 'ring-error', 'bg-error-container/30');
+        
+        // Red explicit class
+        label.classList.add('quiz-wrong');
+        label.classList.remove('bg-surface-container-high', 'text-on-surface');
+
+        // Show the correct answer in green too
+        const correctLabel = optionsEl.children[currentQuestion.a];
+        if (correctLabel) {
+            correctLabel.classList.add('quiz-correct');
+            correctLabel.classList.remove('bg-surface-container-high', 'text-on-surface');
+        }
       }
-      nextBtn.disabled = false;
       updateScore();
       updateProgress();
+      
+      // Auto move after 2 seconds
+      setTimeout(renderQuestion, 2000);
     });
     optionsEl.appendChild(label);
   });
@@ -175,7 +186,7 @@ function showSection(sectionId) {
     const el = document.getElementById(id);
     if (el) el.classList.add('hidden');
   });
-  
+
   if (['algebra', 'geometry', 'probability', 'statistics', 'general'].includes(sectionId)) {
     currentCategory = sectionId;
     usedIndices.clear();
@@ -184,7 +195,7 @@ function showSection(sectionId) {
     renderQuestion();
     updateScore();
     updateProgress();
-    
+
     const showEl = document.getElementById('quiz');
     if (showEl) showEl.classList.remove('hidden');
 
@@ -193,7 +204,7 @@ function showSection(sectionId) {
     if (activeLink) activeLink.classList.add('bg-surface-container-high');
     return;
   }
-  
+
   const showEl = document.getElementById(sectionId);
   if (showEl) showEl.classList.remove('hidden');
 }
@@ -201,7 +212,7 @@ function showSection(sectionId) {
 function updateLeaderboard() {
   const leaderboardBody = document.getElementById('leaderboardBody');
   if (!leaderboardBody) return;
-  
+
   // Real Mock Data plus User
   const players = [
     { name: 'Aron Getachew (You)', xp: xp, mastery: (questions[currentCategory].length > 0 ? (usedIndices.size / questions[currentCategory].length * 100).toFixed(1) : 0) + '%', self: true },
@@ -211,24 +222,33 @@ function updateLeaderboard() {
     { name: 'Logic Queen', xp: 9200, mastery: '81.9%', self: false },
     { name: 'Geo Genius', xp: 8500, mastery: '76.3%', self: false }
   ];
-  
+
   players.sort((a, b) => b.xp - a.xp);
-  
-  leaderboardBody.innerHTML = players.map((p, i) => `
-    <tr class="border-b border-outline-variant/10 hover:bg-surface-container-high transition-colors ${p.self ? 'bg-primary/5' : ''}">
-      <td class="px-6 py-4">
-        <div class="w-6 h-6 ${i < 3 ? 'bg-tertiary/20 text-tertiary' : 'bg-surface-container-highest text-on-surface-variant'} rounded flex items-center justify-center font-black text-xs">${i + 1}</div>
-      </td>
-      <td class="px-6 py-4">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">${p.name[0]}</div>
-            <span class="font-bold text-sm text-on-surface">${p.name}</span>
-        </div>
-      </td>
-      <td class="px-6 py-4 text-right font-black text-sm text-primary">${p.xp.toLocaleString()}</td>
-      <td class="px-6 py-4 text-right font-bold text-sm text-on-surface-variant">${p.mastery}</td>
-    </tr>
-  `).join('');
+
+  leaderboardBody.innerHTML = players.map((p, i) => {
+    let rankStyles = 'bg-surface-container-highest text-on-surface-variant shadow-inner ring-1 ring-surface-container-highest';
+    if (i === 0) rankStyles = 'bg-gradient-to-br from-yellow-300 to-yellow-500 text-yellow-950 shadow-[0_0_15px_rgba(253,224,71,0.5)] scale-110';
+    else if (i === 1) rankStyles = 'bg-gradient-to-br from-slate-200 to-slate-400 text-slate-800 shadow-[0_0_15px_rgba(203,213,225,0.4)] scale-105';
+    else if (i === 2) rankStyles = 'bg-gradient-to-br from-amber-600 to-amber-700 text-amber-100 shadow-[0_0_15px_rgba(217,119,6,0.4)]';
+
+    return `
+    <div class="group flex items-center p-4 pr-6 rounded-3xl bg-surface-container/30 backdrop-blur-md border border-outline-variant/10 hover:bg-surface-container/80 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${p.self ? 'ring-2 ring-primary/50 bg-primary/10' : ''}">
+      <div class="w-12 md:w-16 flex justify-center">
+        <div class="w-8 h-8 md:w-10 md:h-10 rounded-[0.8rem] ${rankStyles} flex items-center justify-center font-black text-sm md:text-base transition-transform duration-300">${i + 1}</div>
+      </div>
+      <div class="flex-1 flex items-center gap-4 pl-3 md:pl-4 border-l border-outline-variant/20">
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-${i % 2 === 0 ? 'secondary' : 'primary'}-container flex items-center justify-center text-on-${i % 2 === 0 ? 'secondary' : 'primary'}-container font-black md:text-lg shadow-inner ring-1 ring-outline-variant/20">${p.name[0]}</div>
+          <span class="font-bold text-sm md:text-base text-on-surface tracking-tight group-hover:text-primary transition-colors">${p.name}</span>
+      </div>
+      <div class="w-24 md:w-32 text-right">
+        <span class="font-black text-base md:text-lg text-primary tracking-tight">${p.xp.toLocaleString()}</span>
+        <span class="text-[9px] md:text-[10px] text-on-surface-variant block uppercase font-bold tracking-widest">XP</span>
+      </div>
+      <div class="w-24 text-right hidden md:block">
+        <span class="font-bold text-base text-on-surface-variant">${p.mastery}</span>
+      </div>
+    </div>
+  `}).join('');
 }
 
 
@@ -254,7 +274,6 @@ function loadData() {
 
 // Event Listeners
 if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (nextBtn) nextBtn.addEventListener('click', renderQuestion);
 if (revealBtn) revealBtn.addEventListener('click', () => {
   if (currentQuestion) {
     resultEl.textContent = `Correct answer is: ${currentQuestion.o[currentQuestion.a]}`;

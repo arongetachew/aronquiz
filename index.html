@@ -127,7 +127,7 @@
         Target: Moderate
       </div>
       <h3 class="font-headline text-3xl text-on-surface font-black mb-6 leading-[1.15] tracking-tight"> 
-        <span id="mcqQuestion" class="bg-gradient-to-br from-on-surface to-on-surface-variant bg-clip-text text-transparent">Loading your next challenge...</span>
+        <span id="mcqQuestion" class="text-on-surface">Loading your next challenge...</span>
       </h3>
       <div class="flex items-start gap-3 p-4 bg-surface-container-low rounded-2xl border border-outline-variant/20 italic">
         <span class="material-symbols-outlined text-primary text-sm">info</span>
@@ -140,12 +140,6 @@
       <div id="mcqOptions" class="grid gap-3"></div>
       
       <div class="mt-8 flex flex-col gap-3">
-        <div class="flex gap-3">
-          <button id="nextBtn" class="flex-1 py-5 bg-primary text-on-primary rounded-2xl font-extrabold shadow-xl shadow-primary/25 hover:bg-primary/90 hover:-translate-y-1 active:scale-95 transition-all text-sm tracking-tight flex items-center justify-center gap-2 group">
-            <span>Verify & Continue</span>
-            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </button>
-        </div>
         <div class="flex gap-3">
             <button id="revealBtn" class="flex-1 py-4 bg-surface-container-highest text-on-surface-variant rounded-2xl font-bold hover:bg-surface-container-highest/80 transition-all text-xs flex items-center justify-center gap-2">
                 <span class="material-symbols-outlined text-sm">visibility</span>
@@ -164,85 +158,77 @@
   </div>
 </section>
 <!-- Progress Section -->
-<section id="progress" class="mt-24 px-4 py-8 md:px-12 lg:px-24 flex flex-col items-center hidden">
-  <div class="w-full max-w-5xl">
-    <h2 class="font-headline text-4xl text-on-surface font-black mb-10 tracking-tight">Academic Achievement</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-surface-container-low p-8 rounded-[2.5rem] border border-outline-variant/30 shadow-sm hover:shadow-md transition-all">
-        <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
-            <span class="material-symbols-outlined">quiz</span>
+<section id="progress" class="mt-24 px-4 py-8 md:px-12 lg:px-24 flex flex-col items-center hidden relative z-10">
+  <div class="w-full max-w-5xl relative">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/10 rounded-full blur-[120px] -z-10"></div>
+    <div class="text-center mb-16">
+       <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-3">Your Stats</span>
+       <h2 class="font-headline text-5xl md:text-6xl text-on-surface font-black tracking-tighter">Academic Achievement</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <!-- Card 1 -->
+      <div class="group relative bg-surface-container-low/60 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-outline-variant/20 shadow-lg hover:shadow-[0_8px_30px_rgb(56,189,248,0.15)] hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-inner ring-1 ring-primary/30 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-2xl">quiz</span>
         </div>
-        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Questions</p>
-        <span id="progressAttempted" class="text-4xl font-black text-on-surface">0</span>
+        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.2em] mb-1 relative z-10">Questions</p>
+        <span id="progressAttempted" class="text-5xl font-black text-on-surface tracking-tighter relative z-10">0</span>
       </div>
-      <div class="bg-surface-container-low p-8 rounded-[2.5rem] border border-outline-variant/30 shadow-sm hover:shadow-md transition-all">
-        <div class="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-6">
-            <span class="material-symbols-outlined">verified</span>
+      <!-- Card 2 -->
+      <div class="group relative bg-surface-container-low/60 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-outline-variant/20 shadow-lg hover:shadow-[0_8px_30px_rgb(52,211,153,0.15)] hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-tertiary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="w-14 h-14 bg-tertiary/20 rounded-2xl flex items-center justify-center text-tertiary mb-6 shadow-inner ring-1 ring-tertiary/30 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-2xl">verified</span>
         </div>
-        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Correct</p>
-        <span id="progressCorrect" class="text-4xl font-black text-on-surface">0</span>
+        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.2em] mb-1 relative z-10">Correct</p>
+        <span id="progressCorrect" class="text-5xl font-black text-on-surface tracking-tighter relative z-10">0</span>
       </div>
-      <div class="bg-surface-container-low p-8 rounded-[2.5rem] border border-outline-variant/30 shadow-sm hover:shadow-md transition-all">
-        <div class="w-12 h-12 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mb-6">
-            <span class="material-symbols-outlined">stars</span>
+      <!-- Card 3 -->
+      <div class="group relative bg-surface-container-low/60 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-outline-variant/20 shadow-lg hover:shadow-[0_8px_30px_rgb(167,139,250,0.15)] hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="w-14 h-14 bg-secondary/20 rounded-2xl flex items-center justify-center text-secondary mb-6 shadow-inner ring-1 ring-secondary/30 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-2xl">stars</span>
         </div>
-        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Total XP</p>
-        <span id="progressScore" class="text-4xl font-black text-on-surface">0</span>
+        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.2em] mb-1 relative z-10">Total XP</p>
+        <span id="progressScore" class="text-5xl font-black text-on-surface tracking-tighter relative z-10">0</span>
       </div>
-      <div class="bg-surface-container-low p-8 rounded-[2.5rem] border border-outline-variant/30 shadow-sm hover:shadow-md transition-all">
-        <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
-            <span class="material-symbols-outlined">insights</span>
+      <!-- Card 4 -->
+      <div class="group relative bg-surface-container-low/60 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-outline-variant/20 shadow-lg hover:shadow-[0_8px_30px_rgb(56,189,248,0.15)] hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center text-primary mb-6 shadow-inner ring-1 ring-primary/30 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-2xl">insights</span>
         </div>
-        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Mastery</p>
-        <span id="progressCompletion" class="text-4xl font-black text-on-surface">0%</span>
+        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.2em] mb-1 relative z-10">Mastery</p>
+        <span id="progressCompletion" class="text-5xl font-black text-on-surface tracking-tighter relative z-10">0%</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Leaderboard Section -->
-<section id="leaderboard" class="mt-24 px-4 py-8 md:px-12 lg:px-24 flex flex-col items-center hidden">
-  <div class="w-full max-w-4xl">
-    <h2 class="font-headline text-4xl text-on-surface font-black mb-10 tracking-tight">Global Rankings</h2>
-    <div class="bg-surface-container-low rounded-[3rem] border border-outline-variant/30 shadow-sm overflow-hidden">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-surface-container-high border-b border-outline-variant/30">
-              <th class="px-8 py-6 text-[10px] text-on-surface-variant font-black uppercase tracking-widest">Rank</th>
-              <th class="px-8 py-6 text-[10px] text-on-surface-variant font-black uppercase tracking-widest">Member</th>
-              <th class="px-8 py-6 text-[10px] text-on-surface-variant font-black uppercase tracking-widest text-right">XP Points</th>
-              <th class="px-8 py-6 text-[10px] text-on-surface-variant font-black uppercase tracking-widest text-right">Mastery</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboardBody">
-            <tr class="border-b border-outline-variant/10 hover:bg-surface-container-high transition-colors">
-              <td class="px-8 py-6">
-                <div class="w-8 h-8 bg-tertiary/20 text-tertiary rounded-lg flex items-center justify-center font-black">1</div>
-              </td>
-              <td class="px-8 py-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">A</div>
-                    <span class="font-bold text-on-surface">Aron Getachew</span>
-                </div>
-              </td>
-              <td class="px-8 py-6 text-right font-black text-primary">12,450</td>
-              <td class="px-8 py-6 text-right font-bold text-on-surface-variant">98.2%</td>
-            </tr>
-            <tr class="border-b border-outline-variant/10 hover:bg-surface-container-high transition-colors">
-              <td class="px-8 py-6">
-                <div class="w-8 h-8 bg-surface-container-highest rounded-lg flex items-center justify-center font-black">2</div>
-              </td>
-              <td class="px-8 py-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container">M</div>
-                    <span class="font-bold text-on-surface">MathBot Alpha</span>
-                </div>
-              </td>
-              <td class="px-8 py-6 text-right font-black text-primary">11,200</td>
-              <td class="px-8 py-6 text-right font-bold text-on-surface-variant">92.4%</td>
-            </tr>
-          </tbody>
-        </table>
+<section id="leaderboard" class="mt-24 px-4 py-8 md:px-12 lg:px-24 flex flex-col items-center hidden relative z-10">
+  <div class="w-full max-w-4xl relative">
+    <div class="text-center mb-16">
+      <span class="text-secondary font-black uppercase tracking-[0.3em] text-[10px] bg-secondary/10 px-4 py-1.5 rounded-full inline-block mb-3">Top Scholars</span>
+      <h2 class="font-headline text-5xl md:text-6xl text-on-surface font-black tracking-tighter">Global Rankings</h2>
+    </div>
+    <div class="bg-surface-container-low/40 backdrop-blur-3xl rounded-[3rem] border border-outline-variant/20 shadow-2xl p-6 lg:p-10 relative overflow-hidden">
+        <!-- background glow -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] -z-10"></div>
+        
+        <!-- Header row -->
+        <div class="flex items-center px-6 py-4 mb-4 border-b border-outline-variant/20 hidden md:flex">
+            <div class="w-16 text-[10px] text-on-surface-variant font-black uppercase tracking-widest text-center">Rank</div>
+            <div class="flex-1 text-[10px] text-on-surface-variant font-black uppercase tracking-widest pl-4">Member</div>
+            <div class="w-32 text-[10px] text-on-surface-variant font-black uppercase tracking-widest text-right">XP Points</div>
+            <div class="w-24 text-[10px] text-on-surface-variant font-black uppercase tracking-widest text-right">Mastery</div>
+        </div>
+        
+        <div id="leaderboardBody" class="flex flex-col gap-4 relative z-10">
+            <!-- Dynamically injected cards -->
+        </div>
     </div>
   </div>
 </section>
