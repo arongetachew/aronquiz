@@ -1,21 +1,26 @@
+/* ================================================================
+   ARON MATH LAB — Design System & Colorful CSS
+   ================================================================ */
+
+/* ---- Design Tokens (Light) ---- */
 :root {
     --primary: #0061a4;
     --on-primary: #ffffff;
     --primary-container: #d1e4ff;
     --on-primary-container: #001d36;
-    --secondary: #535f70;
+    --secondary: #7c4dff;
     --on-secondary: #ffffff;
-    --secondary-container: #d7e3f7;
-    --on-secondary-container: #101c2b;
-    --tertiary: #6b5778;
+    --secondary-container: #ede0ff;
+    --on-secondary-container: #21005d;
+    --tertiary: #00897b;
     --on-tertiary: #ffffff;
-    --tertiary-container: #f2daff;
-    --on-tertiary-container: #251431;
+    --tertiary-container: #b2dfdb;
+    --on-tertiary-container: #00251f;
     --error: #ba1a1a;
     --on-error: #ffffff;
     --error-container: #ffdad6;
     --on-error-container: #410002;
-    --background: #fdfcff;
+    --background: #f4f6ff;
     --on-background: #1a1c1e;
     --surface: #fdfcff;
     --on-surface: #1a1c1e;
@@ -23,150 +28,161 @@
     --on-surface-variant: #43474e;
     --outline: #73777f;
     --outline-variant: #c3c7cf;
-
     --surface-container-lowest: #ffffff;
     --surface-container-low: #f7f9ff;
     --surface-container: #f1f4fb;
     --surface-container-high: #ebedf5;
     --surface-container-highest: #e5e8ef;
-
     --primary-dim: #004a7a;
-
     --font-display: "Outfit", sans-serif;
     --font-body: "Inter", sans-serif;
+
+    /* Subject accent colors */
+    --algebra-color: #0061a4;
+    --geometry-color: #e91e63;
+    --probability-color: #ff6d00;
+    --statistics-color: #7c4dff;
+    --general-color: #00897b;
+    --fractions-color: #f59e0b;
 }
 
-body {
-    background-color: var(--background);
-    color: var(--on-background);
-    font-family: var(--font-body);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-* {
-    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
+/* ---- Dark Mode Tokens ---- */
 html.dark {
-    --primary: #38bdf8; 
-    --on-primary: #022c43;
-    --primary-container: #0284c7;
-    --on-primary-container: #e0f2fe;
-    --secondary: #a78bfa; 
-    --on-secondary: #1e1b4b;
-    --secondary-container: #6d28d9;
-    --on-secondary-container: #ede9fe;
-    --tertiary: #34d399; 
-    --on-tertiary: #022c22;
-    --tertiary-container: #059669;
-    --on-tertiary-container: #d1fae5;
-    --error: #fb7185;
-    --on-error: #4c0519;
-    --error-container: #be123c;
-    --on-error-container: #ffe4e6;
-    --background: #0f172a; 
-    --on-background: #f8fafc;
-    --surface: #0f172a;
-    --on-surface: #f8fafc;
-    --surface-variant: #334155;
-    --on-surface-variant: #cbd5e1;
-    --outline: #64748b;
-    --outline-variant: #334155;
-
-    --surface-container-lowest: #020617; 
-    --surface-container-low: #0f172a;
-    --surface-container: #1e293b;
-    --surface-container-high: #334155;
-    --surface-container-highest: #475569;
-
+    --primary: #38bdf8;
+    --on-primary: #003352;
+    --primary-container: #004a77;
+    --on-primary-container: #cbe6ff;
+    --secondary: #b39dff;
+    --on-secondary: #38006b;
+    --secondary-container: #5500a3;
+    --on-secondary-container: #e9deff;
+    --tertiary: #80cbc4;
+    --on-tertiary: #00332e;
+    --tertiary-container: #004d45;
+    --on-tertiary-container: #9ef0e8;
+    --error: #ffb4ab;
+    --on-error: #690005;
+    --error-container: #93000a;
+    --on-error-container: #ffdad6;
+    --background: #0a0f1e;
+    --on-background: #e2e6f3;
+    --surface: #0d1221;
+    --on-surface: #e2e6f3;
+    --surface-variant: #1c2337;
+    --on-surface-variant: #c3cbe4;
+    --outline: #5c6680;
+    --outline-variant: #2a3350;
+    --surface-container-lowest: #070b16;
+    --surface-container-low: #0d1221;
+    --surface-container: #141929;
+    --surface-container-high: #1c2337;
+    --surface-container-highest: #242c42;
     --primary-dim: #38bdf8;
 }
 
+/* ---- Base ---- */
+* {
+    transition: background-color 0.2s ease, border-color 0.2s ease,
+                box-shadow 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+body {
+    background: var(--background);
+    color: var(--on-background);
+    font-family: var(--font-body);
+}
+
+/* Colorful background gradient for the main content */
+#quiz {
+    background: linear-gradient(160deg,
+        rgba(0, 97, 164, 0.04) 0%,
+        rgba(124, 77, 255, 0.03) 40%,
+        rgba(0, 137, 123, 0.04) 100%);
+    min-height: calc(100vh - 64px);
+}
+
+html.dark #quiz {
+    background: linear-gradient(160deg,
+        rgba(56, 189, 248, 0.05) 0%,
+        rgba(179, 157, 255, 0.04) 50%,
+        rgba(128, 203, 196, 0.04) 100%);
+}
+
+/* ---- Glass Header ---- */
 .math-glass {
-    background: rgba(253, 252, 255, 0.6);
+    background: rgba(253, 252, 255, 0.72);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 }
 
 html.dark .math-glass {
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(13, 18, 33, 0.8);
 }
 
-.mcq-choice input {
-    accent-color: var(--tertiary);
-    width: 22px;
-    height: 22px;
-}
-
-.mcq-choice {
-    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-    border: 2px solid transparent;
-}
-
-.mcq-choice:hover {
-    transform: translateY(-4px);
-    background-color: var(--surface-container-highest);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.mcq-choice:active {
-    transform: translateY(-1px);
-}
-
-.output {
-    border-width: 2px;
-}
-
-#nextBtn {
-    border: 2px solid var(--tertiary-container);
-}
-
-#nextBtn:hover {
-    background: var(--tertiary-container);
-}
-
+/* ---- Font ---- */
 .font-headline {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
 }
 
+/* ---- Color Utilities ---- */
 .bg-primary { background-color: var(--primary); }
 .text-on-primary { color: var(--on-primary); }
 .bg-secondary { background-color: var(--secondary); }
 .text-on-secondary { color: var(--on-secondary); }
 .bg-tertiary { background-color: var(--tertiary); }
 .text-on-tertiary { color: var(--on-tertiary); }
+.bg-primary-container { background-color: var(--primary-container); }
+.bg-secondary-container { background-color: var(--secondary-container); }
+.bg-tertiary-container { background-color: var(--tertiary-container); }
+.on-primary-container { color: var(--on-primary-container); }
+.bg-error-container { background-color: var(--error-container); }
 .bg-background { background-color: var(--background); }
 .text-on-background { color: var(--on-background); }
 .bg-surface { background-color: var(--surface); }
 .text-on-surface { color: var(--on-surface); }
 .bg-surface-variant { background-color: var(--surface-variant); }
 .text-on-surface-variant { color: var(--on-surface-variant); }
-
 .bg-surface-container-lowest { background-color: var(--surface-container-lowest); }
 .bg-surface-container-low { background-color: var(--surface-container-low); }
 .bg-surface-container { background-color: var(--surface-container); }
 .bg-surface-container-high { background-color: var(--surface-container-high); }
 .bg-surface-container-highest { background-color: var(--surface-container-highest); }
-
 .text-primary { color: var(--primary); }
 .text-secondary { color: var(--secondary); }
 .text-tertiary { color: var(--tertiary); }
+.border-outline-variant { border-color: var(--outline-variant); }
 
-.border-primary { border-color: var(--primary); }
-.border-secondary { border-color: var(--secondary); }
-.border-tertiary { border-color: var(--tertiary); }
-
-.shadow-primary { box-shadow: 0 4px 6px -1px var(--primary), 0 2px 4px -1px var(--primary); }
-
+/* ---- Rounded ---- */
 .rounded-full { border-radius: 9999px; }
 .rounded-lg { border-radius: 0.5rem; }
 .rounded-xl { border-radius: 0.75rem; }
 .rounded-2xl { border-radius: 1rem; }
 .rounded-3xl { border-radius: 1.5rem; }
-.rounded-r-\[3rem\] { border-top-right-radius: 3rem; border-bottom-right-radius: 3rem; }
 .rounded-t-\[3rem\] { border-top-left-radius: 3rem; border-top-right-radius: 3rem; }
 
+/* ================================================================
+   MCQ OPTION CHOICES
+   ================================================================ */
+.mcq-choice {
+    border: 2px solid transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+}
+
+.mcq-choice:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 97, 164, 0.12);
+    border-color: rgba(0, 97, 164, 0.25);
+}
+
+.mcq-choice:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* ================================================================
+   STATUS BANNERS
+   ================================================================ */
 .status-neutral {
     background-color: var(--surface-container);
     border-color: var(--outline-variant);
@@ -174,90 +190,381 @@ html.dark .math-glass {
 }
 
 .status-correct {
-    background-color: var(--secondary-container);
-    border-color: var(--secondary);
-    color: var(--on-secondary-container);
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border-color: #10b981;
+    color: #064e3b;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+html.dark .status-correct {
+    background: linear-gradient(135deg, #064e3b, #065f46);
+    border-color: #10b981;
+    color: #a7f3d0;
 }
 
 .status-wrong {
-    background-color: var(--error-container);
-    border-color: var(--error);
-    color: var(--on-error-container);
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    border-color: #ef4444;
+    color: #7f1d1d;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
 }
 
-.correct-glow {
-    box-shadow: 0 0 22px var(--secondary), 0 0 28px var(--secondary);
-    border-color: var(--secondary);
+html.dark .status-wrong {
+    background: linear-gradient(135deg, #450a0a, #7f1d1d);
+    border-color: #ef4444;
+    color: #fecaca;
 }
 
-.wrong-glow {
-    box-shadow: 0 0 22px var(--error), 0 0 30px var(--error);
-    border-color: var(--error);
-}
-
-.ghost-border {
-    border: 1px solid rgba(var(--outline-variant), 0.15);
-}
-
-.ghost-border-secondary {
-    border: 2px solid var(--secondary);
-}
-
-#popMessage .popup {
-    background: var(--surface-container-high);
-    color: var(--on-surface);
-    border: 2px solid var(--tertiary);
-    border-radius: 16px;
-    box-shadow: 0 0 18px var(--tertiary);
-    padding: 1rem 1.4rem;
-    max-width: 320px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 700;
-    animation: popupBounce 0.7s ease-out;
-}
-
-#popMessage .popup.correct {
-    background: var(--secondary-container);
-    border-color: var(--secondary);
-}
-
-#popMessage .popup.wrong {
-    background: var(--error-container);
-    border-color: var(--error);
-}
-
-@keyframes popupBounce {
-    0% { transform: translateY(30px) scale(0.9); opacity: 0; }
-    40% { transform: translateY(-10px) scale(1.05); opacity: 1; }
-    70% { transform: translateY(4px) scale(0.98); }
-    100% { transform: translateY(0) scale(1); }
-}
-
+/* ================================================================
+   QUIZ CORRECT / WRONG LABELS
+   ================================================================ */
 .quiz-correct {
-    background-color: #dcfce7 !important;
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0) !important;
     border-color: #22c55e !important;
     color: #166534 !important;
-    box-shadow: 0 0 0 2px #22c55e !important;
+    box-shadow: 0 0 0 2px #22c55e, 0 4px 16px rgba(34, 197, 94, 0.25) !important;
+    transform: scale(1.01);
 }
 
 html.dark .quiz-correct {
-    background-color: #064e3b !important;
+    background: linear-gradient(135deg, #052e16, #064e3b) !important;
     border-color: #10b981 !important;
     color: #a7f3d0 !important;
-    box-shadow: 0 0 0 2px #10b981 !important;
+    box-shadow: 0 0 0 2px #10b981, 0 4px 16px rgba(16, 185, 129, 0.3) !important;
 }
 
 .quiz-wrong {
-    background-color: #fee2e2 !important;
+    background: linear-gradient(135deg, #fee2e2, #fecaca) !important;
     border-color: #ef4444 !important;
     color: #b91c1c !important;
-    box-shadow: 0 0 0 2px #ef4444 !important;
+    box-shadow: 0 0 0 2px #ef4444, 0 4px 16px rgba(239, 68, 68, 0.2) !important;
 }
 
 html.dark .quiz-wrong {
-    background-color: #7f1d1d !important;
+    background: linear-gradient(135deg, #450a0a, #7f1d1d) !important;
     border-color: #ef4444 !important;
     color: #fecaca !important;
     box-shadow: 0 0 0 2px #ef4444 !important;
 }
+
+/* ================================================================
+   PROGRESS BAR — Animated shimmer
+   ================================================================ */
+#progressBar {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #0061a4, #7c4dff, #00897b);
+    background-size: 200% 100%;
+    animation: gradientSlide 4s linear infinite;
+    box-shadow: 0 0 12px rgba(0, 97, 164, 0.5);
+}
+
+#progressBar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes gradientSlide {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+    0%   { left: -60%; }
+    100% { left: 120%; }
+}
+
+/* ================================================================
+   BOTTOM NAV — Subject accent colors
+   ================================================================ */
+.mobile-cat-btn { transition: color 0.2s ease, transform 0.15s ease; }
+.mobile-cat-btn:active { transform: scale(0.9); }
+
+/* Per-subject icon colors when active */
+.mobile-cat-btn.text-primary[data-subject="algebra"]    { color: var(--algebra-color) !important; }
+.mobile-cat-btn.text-primary[data-subject="geometry"]   { color: var(--geometry-color) !important; }
+.mobile-cat-btn.text-primary[data-subject="probability"]{ color: var(--probability-color) !important; }
+.mobile-cat-btn.text-primary[data-subject="statistics"] { color: var(--statistics-color) !important; }
+.mobile-cat-btn.text-primary[data-subject="general"]    { color: var(--general-color) !important; }
+.mobile-cat-btn.text-primary[data-subject="fractions"]  { color: var(--fractions-color) !important; }
+
+/* ================================================================
+   BOTTOM NAV — 3D Raised Effect
+   ================================================================ */
+
+/* The whole bottom bar sits on a 3D "platform" */
+nav.lg\:hidden {
+    background: rgba(253, 252, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    /* 3D layered shadow stack */
+    box-shadow:
+        0 -1px 0   rgba(255, 255, 255, 0.9) inset,  /* inner top gloss */
+        0 -2px 0   rgba(0, 97, 164, 0.4),             /* blue ledge */
+        0 -4px 0   rgba(124, 77, 255, 0.3),           /* purple ledge */
+        0 -6px 0   rgba(0, 137, 123, 0.2),            /* teal ledge */
+        0 -12px 24px rgba(0, 0, 0, 0.12);             /* ambient shadow above */
+
+    /* Animated rainbow top border */
+    border-top: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    z-index: 40;
+}
+
+html.dark nav.lg\:hidden {
+    background: rgba(13, 18, 33, 0.9);
+    box-shadow:
+        0 -1px 0   rgba(255,255,255,0.05) inset,
+        0 -2px 0   rgba(56, 189, 248, 0.55),
+        0 -4px 0   rgba(179, 157, 255, 0.4),
+        0 -6px 0   rgba(128, 203, 196, 0.25),
+        0 -12px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Animated rainbow top edge line on the bar */
+nav.lg\:hidden::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0061a4, #7c4dff, #e91e63, #ff6d00, #00897b, #0061a4);
+    background-size: 300% 100%;
+    animation: navBarGradient 5s linear infinite;
+}
+
+@keyframes navBarGradient {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+/* Each tab button — 3D press on active/tap */
+.mobile-cat-btn {
+    transition: color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    border-radius: 0.75rem;
+}
+
+/* Active tab gets a glowing pill indicator */
+.mobile-cat-btn.text-primary::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+    animation: pillPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pillPop {
+    from { width: 0; opacity: 0; }
+    to   { width: 24px; opacity: 1; }
+}
+
+/* Press down effect */
+.mobile-cat-btn:active {
+    transform: translateY(3px) scale(0.9);
+    box-shadow:
+        0 0 0 rgba(0,0,0,0),
+        inset 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* Hover lifts slightly */
+.mobile-cat-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 97, 164, 0.15);
+}
+
+/* Keep active icon pop animation */
+.mobile-cat-btn.text-primary .material-symbols-outlined {
+    animation: navPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 2px 4px currentColor);
+}
+
+/* ================================================================
+   STATS ROW — Gradient text
+   ================================================================ */
+#scoreDisplay {
+    background: linear-gradient(135deg, #0061a4, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#totalXpDisplay {
+    background: linear-gradient(135deg, #7c4dff, #e91e63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#unitTitle {
+    background: linear-gradient(135deg, #00897b, #00bfa5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ================================================================
+   QUESTION CARD — 3D Border Effect
+   ================================================================ */
+
+/* Wrapper that gives the card a 3D lift platform */
+#quiz .bg-surface-container-low.rounded-3xl {
+    position: relative;
+    border: none !important;
+    border-image: none !important;
+
+    /* Multi-layer box-shadow = 3D raised effect */
+    box-shadow:
+        0 1px 0    rgba(255,255,255,0.9),      /* top highlight */
+        0 2px 0    rgba(0, 97, 164, 0.5),       /* primary colour ledge */
+        0 4px 0    rgba(124, 77, 255, 0.35),    /* secondary colour ledge */
+        0 6px 0    rgba(0, 137, 123, 0.25),     /* tertiary colour ledge */
+        0 8px 16px rgba(0, 0, 0, 0.15),         /* diffuse drop shadow */
+        0 14px 32px rgba(0, 97, 164, 0.12);     /* ambient glow */
+
+    /* Gradient border via outline trick */
+    outline: 2px solid transparent;
+    background-clip: padding-box;
+    transform: perspective(800px) rotateX(0.5deg);
+    transform-origin: top center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Coloured top stripe as a pseudo-element */
+#quiz .bg-surface-container-low.rounded-3xl::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 1.5rem 1.5rem 0 0;
+    background: linear-gradient(90deg, #0061a4, #7c4dff, #e91e63, #ff6d00, #00897b);
+    background-size: 200% 100%;
+    animation: borderGradient 4s linear infinite;
+}
+
+/* Subtle left edge "depth" stripe */
+#quiz .bg-surface-container-low.rounded-3xl::after {
+    content: '';
+    position: absolute;
+    top: 4px; bottom: 8px; left: 0;
+    width: 3px;
+    border-radius: 0 0 0 1.5rem;
+    background: linear-gradient(180deg, #7c4dff 0%, transparent 100%);
+    opacity: 0.5;
+}
+
+/* Lift on hover */
+#quiz .bg-surface-container-low.rounded-3xl:hover {
+    transform: perspective(800px) rotateX(0deg) translateY(-2px);
+    box-shadow:
+        0 1px 0    rgba(255,255,255,0.9),
+        0 3px 0    rgba(0, 97, 164, 0.55),
+        0 6px 0    rgba(124, 77, 255, 0.4),
+        0 9px 0    rgba(0, 137, 123, 0.3),
+        0 12px 24px rgba(0, 0, 0, 0.18),
+        0 20px 40px rgba(0, 97, 164, 0.15);
+}
+
+html.dark #quiz .bg-surface-container-low.rounded-3xl {
+    box-shadow:
+        0 1px 0    rgba(255,255,255,0.08),
+        0 2px 0    rgba(56, 189, 248, 0.6),
+        0 4px 0    rgba(179, 157, 255, 0.45),
+        0 6px 0    rgba(128, 203, 196, 0.3),
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        0 16px 40px rgba(56, 189, 248, 0.1);
+}
+
+@keyframes borderGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* ================================================================
+   SIDEBAR — Hover subject gradient highlights
+   ================================================================ */
+.subject-link[data-subject="algebra"]:hover    { background: linear-gradient(90deg, rgba(0,97,164,0.1), transparent); color: var(--algebra-color) !important; }
+.subject-link[data-subject="geometry"]:hover   { background: linear-gradient(90deg, rgba(233,30,99,0.1), transparent); color: var(--geometry-color) !important; }
+.subject-link[data-subject="probability"]:hover{ background: linear-gradient(90deg, rgba(255,109,0,0.1), transparent); color: var(--probability-color) !important; }
+.subject-link[data-subject="statistics"]:hover { background: linear-gradient(90deg, rgba(124,77,255,0.1), transparent); color: var(--statistics-color) !important; }
+.subject-link[data-subject="general"]:hover    { background: linear-gradient(90deg, rgba(0,137,123,0.1), transparent); color: var(--general-color) !important; }
+.subject-link[data-subject="fractions"]:hover  { background: linear-gradient(90deg, rgba(245,158,11,0.1), transparent); color: var(--fractions-color) !important; }
+
+/* ================================================================
+   REVEAL / RESET BUTTONS — Gradient on hover
+   ================================================================ */
+#revealBtn:hover {
+    background: linear-gradient(135deg, #ede0ff, #d1e4ff);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+html.dark #revealBtn:hover {
+    background: linear-gradient(135deg, #1c2337, #242c42);
+    color: var(--primary);
+}
+
+/* ================================================================
+   MCQ OPTION LETTER BADGE — colorful per position
+   ================================================================ */
+.mcq-choice:nth-child(1) .w-6 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; }
+.mcq-choice:nth-child(2) .w-6 { background: linear-gradient(135deg, #f3e8ff, #ede0ff); color: #6b21a8; }
+.mcq-choice:nth-child(3) .w-6 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #166534; }
+.mcq-choice:nth-child(4) .w-6 { background: linear-gradient(135deg, #fff7ed, #fed7aa); color: #9a3412; }
+
+html.dark .mcq-choice:nth-child(1) .w-6 { background: linear-gradient(135deg, #1e3a5f, #1e40af); color: #bfdbfe; }
+html.dark .mcq-choice:nth-child(2) .w-6 { background: linear-gradient(135deg, #3b0764, #6b21a8); color: #ede9fe; }
+html.dark .mcq-choice:nth-child(3) .w-6 { background: linear-gradient(135deg, #052e16, #166534); color: #bbf7d0; }
+html.dark .mcq-choice:nth-child(4) .w-6 { background: linear-gradient(135deg, #431407, #9a3412); color: #fed7aa; }
+
+/* Override on hover — keeps primary */
+.mcq-choice:hover .w-6,
+.mcq-choice:has(input:checked) .w-6 {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+@keyframes popupBounce {
+    0%   { transform: translateY(30px) scale(0.9); opacity: 0; }
+    40%  { transform: translateY(-10px) scale(1.05); opacity: 1; }
+    70%  { transform: translateY(4px) scale(0.98); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Questions fade in on each load */
+#mcqOptions label {
+    animation: fadeSlideIn 0.3s ease both;
+}
+
+#mcqOptions label:nth-child(1) { animation-delay: 0.05s; }
+#mcqOptions label:nth-child(2) { animation-delay: 0.10s; }
+#mcqOptions label:nth-child(3) { animation-delay: 0.15s; }
+#mcqOptions label:nth-child(4) { animation-delay: 0.20s; }
+
+/* ================================================================
+   NO-SCROLLBAR UTILITY
+   ================================================================ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
